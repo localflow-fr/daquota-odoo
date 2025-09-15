@@ -1,0 +1,74 @@
+<odoo>
+    <record id="res_config_settings_view_form_daquota_app_proxy" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.daquota.app.proxy</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <div class="app_settings_block" string="Daquota App via Proxy" name="daquota_app_proxy_settings">
+                    <h2>Daquota App via Proxy</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12">
+                            <div class="o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="integration_db"/>
+                                    <div class="text-muted">DB name to connect to.</div>
+                                    <div class="mt16">
+                                        <field name="integration_db" placeholder="db_name"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="proxy_auth_method"/>
+                                    <div class="text-muted">
+                                        Select whether to use fixed login/password or the current user's API key.
+                                    </div>
+                                    <div class="mt16">
+                                        <field name="proxy_auth_method"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="integration_login"/>
+                                    <div class="text-muted">Login (integration user, not used if API key is selected).</div>
+                                    <div class="mt16">
+                                        <field name="integration_login"
+                                               placeholder="integration_user"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="integration_password"/>
+                                    <div class="text-muted">Password (integration user, not used if API key is selected).</div>
+                                    <div class="mt16">
+                                        <field name="integration_password"
+                                               password="True"
+                                               placeholder="password"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- <div class="o_setting_box">
+                                <div class="o_setting_right_pane">
+                                    <label for="app_name"/>
+                                    <div class="text-muted">
+                                        Daquota app to be started from Odoo.
+                                    </div>
+                                    <div class="mt16">
+                                        <field name="app_name" placeholder="Daquota_Maps"/>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
