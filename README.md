@@ -2,9 +2,6 @@
 
 [![Odoo Version](https://img.shields.io/badge/Odoo-17.0-brightgreen.svg)](https://www.odoo.com)  
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)  
-[![GitHub issues](https://img.shields.io/github/issues/<your-org>/daquota-odoo)](https://github.com/<your-org>/daquota-odoo/issues)  
-[![GitHub stars](https://img.shields.io/github/stars/<your-org>/daquota-odoo?style=social)](https://github.com/<your-org>/daquota-odoo/stargazers)  
-[![GitHub forks](https://img.shields.io/github/forks/<your-org>/daquota-odoo?style=social)](https://github.com/<your-org>/daquota-odoo/network/members)  
 
 **Version:** 17.0.1.0.0  
 **License:** LGPL-3  
