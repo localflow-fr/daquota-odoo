@@ -1,4 +1,4 @@
-# Daquota Connector
+# Daquota Connector for Odoo
 
 [![Odoo Version](https://img.shields.io/badge/Odoo-17.0-brightgreen.svg)](https://www.odoo.com)  
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)  
