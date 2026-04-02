@@ -11,7 +11,7 @@ The Daquota Connector allows Odoo users to seamlessly open and interact with Daq
     'category': 'Tools',
     'depends': [
         'base_setup',
-        'partner_geolocalize',
+        'base_geolocalize',
     ],
     'data': [
         'security/ir.model.access.csv',
