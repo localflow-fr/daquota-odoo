@@ -21,6 +21,6 @@ The Daquota Connector allows Odoo users to seamlessly open and interact with Daq
         'views/menu_items.xml',
     ],
     'installable': True,
-    'application': False,
+    'application': True,
     'auto_install': False,
 }
