@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_geodata_user,access_geodata_user,model_fr_localflow_geodata,base.group_user,1,1,1,1
+access_geodata_user,GeoData User Access,model_fr_localflow_geodata,base.group_user,1,1,1,1
+access_json_data_user,JSON Data User Access,model_fr_localflow_json_data,base.group_user,1,1,1,1

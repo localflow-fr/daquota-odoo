@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_geodata_tree" model="ir.ui.view">
+        <field name="name">fr.localflow.geodata.tree</field>
+        <field name="model">fr.localflow.geodata</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="type"/>
+                <field name="create_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_geodata_form" model="ir.ui.view">
+        <field name="name">fr.localflow.geodata.form</field>
+        <field name="model">fr.localflow.geodata</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="type"/>
+                    </group>
+                    <notebook>
+                        <page string="Content" name="content">
+                            <field name="content" widget="ace" options="{'mode': 'python'}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_json_data_tree" model="ir.ui.view">
+        <field name="name">fr.localflow.json_data.tree</field>
+        <field name="model">fr.localflow.json_data</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="application_name"/>
+                <field name="type"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_json_data_form" model="ir.ui.view">
+        <field name="name">fr.localflow.json_data.form</field>
+        <field name="model">fr.localflow.json_data</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="Data Name..."/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="application_name"/>
+                            <field name="type"/>
+                        </group>
+                        <group>
+                            <field name="description"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="JSON Content" name="content">
+                            <field name="content" widget="ace" options="{'mode': 'javascript'}"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

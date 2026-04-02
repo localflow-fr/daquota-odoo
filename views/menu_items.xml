@@ -1,0 +1,56 @@
+<odoo>
+    <!-- Main Daquota Menu -->
+    <menuitem
+        id="daquota_app_launcher_root_menu"
+        name="Daquota"
+        sequence="10"
+        web_icon="daquota_odoo,static/description/icon.png"
+    />
+
+    <!-- Menu item to launch LocalFlow Maps -->
+    <menuitem
+        id="menu_launch_localflow_maps"
+        name="LocalFlow Maps"
+        parent="daquota_app_launcher_root_menu"
+        action="action_launch_localflow_maps"
+        sequence="1"
+    />
+
+    <!-- Action to redirect to the Daquota app -->
+    <record id="action_launch_localflow_maps" model="ir.actions.act_url">
+        <field name="name">Launch LocalFlow Maps</field>
+        <field name="url">/daquota_app_launcher/redirect?app_name=LocalFlow_Maps</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Actions from menus.xml -->
+    <record id="action_fr_localflow_geodata" model="ir.actions.act_window">
+        <field name="name">Geodata</field>
+        <field name="res_model">fr.localflow.geodata</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <record id="action_fr_localflow_json_data" model="ir.actions.act_window">
+        <field name="name">JSON Data Holder</field>
+        <field name="res_model">fr.localflow.json_data</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <!-- Menus from menus.xml, now under the 'Daquota' root -->
+    <menuitem id="menu_localflow_data"
+              parent="daquota_app_launcher_root_menu"
+              name="Data Management"
+              sequence="20"/>
+
+    <menuitem id="menu_geodata_list"
+              parent="menu_localflow_data"
+              name="Geodata Records"
+              action="action_fr_localflow_geodata"
+              sequence="10"/>
+
+    <menuitem id="menu_json_data_list"
+              parent="menu_localflow_data"
+              name="JSON Data Records"
+              action="action_fr_localflow_json_data"
+              sequence="20"/>
+</odoo>

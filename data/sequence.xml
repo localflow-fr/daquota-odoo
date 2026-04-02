@@ -1,8 +1,0 @@
-<odoo>
-    <record id="seq_fr_localflow_geodata" model="ir.sequence">
-        <field name="name">Geodata Sequence</field>
-        <field name="code">fr.localflow.geodata</field>
-        <field name="prefix">GD</field>
-        <field name="padding">5</field>
-    </record>
-</odoo>

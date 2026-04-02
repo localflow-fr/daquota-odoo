@@ -17,45 +17,54 @@ class DaquotaAppProxyController(http.Controller):
             return "Missing app name. Please pass ?app_name=xxx in the URL."
         
         icp = request.env["ir.config_parameter"].sudo()
-        # proxy_url = icp.get_param("daquota_app_launcher.proxy_url")
         proxy_url = "https://backoffice.daquota.io"
 
+        integration_url = request.httprequest.url_root.rstrip('/')
+        integration_db = icp.get_param("daquota_app_launcher.integration_db")
         auth_method = icp.get_param("daquota_app_launcher.proxy_auth_method", "login_pass")
 
         if auth_method == "login_pass":
-            # integration_url = icp.get_param("daquota_app_launcher.integration_url")
-            integration_url = request.httprequest.url_root.rstrip('/')
-            integration_db = icp.get_param("daquota_app_launcher.integration_db")
             integration_login = icp.get_param("daquota_app_launcher.integration_login")
             integration_password = icp.get_param("daquota_app_launcher.integration_password")
+
+            if not (integration_url and integration_db and integration_login and integration_password):
+                return "Missing configuration for Login/Password authentication. Please check Daquota settings."
+
             auth_payload = {
                 "url": integration_url,
                 "db": integration_db,
                 "username": integration_login,
                 "password": integration_password
             }
+            _logger.info(f"Proxy login: {integration_login}")
+
         elif auth_method == "user_apikey":
             # Use the current logged-in user's login and API key
             user = request.env.user
-            if not user.api_key:
+            # For Odoo 16+, API keys are stored in `api_key_ids`.
+            # We'll take the first one if it exists.
+            if not user.api_key_ids:
                 return "Current user has no API key. Please create one in Preferences."
+            
+            api_key = user.api_key_ids[0].key
+
+            if not (integration_url and integration_db):
+                return "Missing DB configuration for API Key authentication. Please check Daquota settings."
+
             auth_payload = {
                 "url": integration_url,
                 "db": integration_db,
                 "username": user.login,
-                "password": user.api_key
+                "password": api_key
             }
+            _logger.info(f"Proxy login (using user API key): {user.login}")
+
         else:
             return "Invalid proxy authentication method configuration."
                 
         _logger.info(f"Proxy server URL: {integration_url}")
         _logger.info(f"Proxy DB: {integration_db}")
-        _logger.info(f"Proxy login: {integration_login}")
-        #_logger.info(f"Proxy password: {integration_password}")
         _logger.info(f"Proxy app name: {app_name}")
-
-        if not (integration_url and integration_db and integration_login and integration_password and app_name):
-            return "Missing configuration. Please check Settings."
 
         server_domain = request.httprequest.host
 
@@ -108,8 +117,6 @@ class DaquotaAppProxyController(http.Controller):
             _logger.info(f"proxy version: {proxy_version}")
 
             token = self._login_to_proxy(proxy_url, proxy_version, auth_payload)
-            if not token:
-                return "No access token in proxy response."
             if not token:
                 return "No access token in proxy response."
 
@@ -178,7 +185,6 @@ class DaquotaAppProxyController(http.Controller):
             email = user.login
 
             params = {
-                "user": email,
                 "templateTenant": "template1-odoo",
                 "targetTenant": server_domain
             }
@@ -193,7 +199,8 @@ class DaquotaAppProxyController(http.Controller):
             try:
                 resp = requests.post(create_url, json={}, headers={
                     "Content-Type": "application/json",
-                    "Authorization": f"Bearer {token}"
+                    "Authorization": f"Bearer {token}",
+                    "X-User": email
                 }, timeout=10)
                 if resp.ok:
                     _logger.info(f"Tenant {server_domain} successfully created.")
